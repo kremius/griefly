@@ -1,6 +1,8 @@
 Griefly
 ===========
 
+[![Join the chat at https://gitter.im/kremius/karya-valya](https://badges.gitter.im/kremius/karya-valya.svg)](https://gitter.im/kremius/karya-valya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/kremius/karya-valya.svg?branch=master)](https://travis-ci.org/kremius/karya-valya)
 
 It used to be **Karya &amp; Valya Rogue-like**, but now it is **Griefly: Yet Another Space Station Remake**
