@@ -1,6 +1,8 @@
 Griefly
 ===========
 
+[![Join the chat at https://gitter.im/kremius/karya-valya](https://badges.gitter.im/kremius/karya-valya.svg)](https://gitter.im/kremius/karya-valya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/kremius/karya-valya.svg?branch=master)](https://travis-ci.org/kremius/karya-valya)
 [![Coverage Status](https://coveralls.io/repos/github/kremius/karya-valya/badge.svg?branch=master)](https://coveralls.io/github/kremius/karya-valya?branch=master)
 
