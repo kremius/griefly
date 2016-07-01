@@ -66,3 +66,12 @@ Wrench::Wrench(size_t id) : Item(id)
 
     name = "Wrench";
 }
+BulletCasing::BulletCasing(size_t id) : Item(id)
+{
+    SetSprite("icons/ammo.dmi");
+    SetState("s-casing");
+
+    damage = 0;
+
+    name = "Bullet Casing";
+}

@@ -8,6 +8,8 @@
 class ITurf;
 class IMovable;
 class Item;
+class Projectile;
+
 
 typedef int PassableLevel;
 namespace Passable
@@ -74,7 +76,6 @@ public:
         }
         return false;
     }
-
     // Add some item
     // True - added
     // False - failed

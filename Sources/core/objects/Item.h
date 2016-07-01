@@ -50,3 +50,11 @@ public:
 };
 ADD_TO_TYPELIST(Wrench);
 
+class BulletCasing: public Item
+{
+public:
+    DECLARE_SAVED(BulletCasing, Item);
+    DECLARE_GET_TYPE_ITEM(BulletCasing);
+    BulletCasing(size_t id);
+};
+ADD_TO_TYPELIST(BulletCasing);

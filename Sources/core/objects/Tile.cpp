@@ -418,3 +418,4 @@ void CubeTile::LoadInMap()
 {
     GetGame().GetMap().GetSquares()[posx_][posy_][posz_] = GetId();
 }
+

@@ -34,7 +34,7 @@ public:
     void processMove();//for move
     virtual bool TryMove(Dir direct);
     bool CheckMoveTime();
-    bool CheckPassable();
+    virtual bool CheckPassable();
     bool MainMove();
 
     virtual bool Rotate(Dir dir);
