@@ -27,8 +27,12 @@ install:
     - cmd: cd %APPVEYOR_BUILD_FOLDER%
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
-build_script:
+before_build:
     - cmd: cmake -DCMAKE_BUILD_TYPE=Release
+
+build:
+    parallel: true                  # enable MSBuild parallel builds
+    project: KVEngineQt.sln
 
 artifacts:
     - path: Exec
