@@ -28,7 +28,7 @@ install:
 
 build_script:
     - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
-    - cmd: cmake --build . --target install -- /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - cmd: cmake --build . --target install --config Release -- /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
 artifacts:
