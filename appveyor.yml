@@ -1,4 +1,3 @@
-# vim:ft=ansible:
 version: 1.0.{build}
 image: Visual Studio 2013
 
@@ -6,31 +5,30 @@ environment:
     QT5DIR: C:\Qt\5.4
 
 install:
-    - cmd: >-
-        choco install -y curl
-        REM Install SFML
-        curl -OJL http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip
-        7z x SFML-2.3-windows-vc12-32-bit.zip
-        SET SFML_ROOT=%CD%\SFML-2.3
-        REM Install libpng
-        curl -OJL https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download
-        7z x lpng1612.7z
-        SET PNG_INCLUDE_DIR=%CD%\lpng1612
-        SET PNG_LIBRARY_DIR=%CD%\lpng1612\projects\vstudio\Release
-        REM Install zlib
-        curl -OJL http://zlib.net/zlib128-dll.zip
-        7z x zlib128-dll.zip -o%CD%\zlib128-dll
-        curl -OJL http://zlib.net/zlib128.zip
-        7z x zlib128.zip
-        SET ZLIB_ROOT=%CD%\zlib128-dll
-        cd lpng1612\projects\vstudio
-        msbuild vstudio.sln /p:Configuration=Release
-        cd %APPVEYOR_BUILD_FOLDER%
-        SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
+    - cmd: choco install -y curl
+    # Install SFML
+    - cmd: curl -OJL http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip
+    - cmd: 7z x SFML-2.3-windows-vc12-32-bit.zip
+    - cmd: SET SFML_ROOT=%CD%\SFML-2.3
+    # Install libpng
+    - cmd: curl -OJL https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download
+    - cmd: 7z x lpng1612.7z
+    - cmd: SET PNG_INCLUDE_DIR=%CD%\lpng1612
+    - cmd: SET PNG_LIBRARY_DIR=%CD%\lpng1612\projects\vstudio\Release
+    # Install zlib
+    - cmd: curl -OJL http://zlib.net/zlib128-dll.zip
+    - cmd: 7z x zlib128-dll.zip -o%CD%\zlib128-dll
+    - cmd: curl -OJL http://zlib.net/zlib128.zip
+    - cmd: 7z x zlib128.zip
+    - cmd: SET ZLIB_ROOT=%CD%\zlib128-dll
+    # Build libpng
+    - cmd: cd lpng1612\projects\vstudio
+    - cmd: msbuild vstudio.sln /p:Configuration=Release
+    - cmd: cd %APPVEYOR_BUILD_FOLDER%
+    - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
 build_script:
-    - cmd: >-
-        cmake -DCMAKE_BUILD_TYPE=Release
+    - cmd: cmake -DCMAKE_BUILD_TYPE=Release
 
 artifacts:
     - path: Exec
