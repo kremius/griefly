@@ -28,7 +28,9 @@ install:
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
 before_build:
-    - cmd: cmake -DCMAKE_BUILD_TYPE=Release
+    - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
+
+configuration: Release
 
 build:
     parallel: true                  # enable MSBuild parallel builds
@@ -37,3 +39,6 @@ build:
 artifacts:
     - path: Exec
       name: Client Executable
+
+test_script:
+    - cmd: KVEngine.exe --run-tests
