@@ -26,7 +26,10 @@ install:
     - cmd: cd %APPVEYOR_BUILD_FOLDER%
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
-build_script: cmake --build . --target install -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
+build_script:
+    - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
+    - cmd: cmake --build . --target install -- /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
 
 artifacts:
     - path: Exec
