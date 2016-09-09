@@ -36,9 +36,11 @@ build:
     parallel: true                  # enable MSBuild parallel builds
     project: KVEngineQt.sln
 
+after_build: msbuild.exe INSTALL.vcproj
+
 artifacts:
     - path: Exec
       name: Client Executable
 
 test_script:
-    - cmd: KVEngine.exe --run-tests
+    - cmd: Exec\KVEngine.exe --run-tests
