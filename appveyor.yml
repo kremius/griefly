@@ -27,9 +27,11 @@ install:
         msbuild vstudio.sln /p:Configuration=Release
         cd %APPVEYOR_BUILD_FOLDER%
         SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
+
 build_script:
     - cmd: >-
-      cmake -DCMAKE_BUILD_TYPE=Release
+        cmake -DCMAKE_BUILD_TYPE=Release
+
 artifacts:
     - path: Exec
       name: Client Executable
