@@ -36,4 +36,5 @@ artifacts:
       name: Client Executable
 
 test_script:
-    - cmd: Exec\KVEngine.exe --run-tests
+    - cmd: cd Exec
+    - cmd: KVEngine.exe --run-tests
