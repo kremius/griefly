@@ -1,5 +1,7 @@
+# vim:ft=ansible:
 version: 1.0.{build}
 image: Visual Studio 2013
+
 environment:
     QT5DIR: C:\Qt\5.4
 
@@ -27,7 +29,7 @@ install:
         SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 build_script:
     - cmd: >-
-        cmake -DCMAKE_BUILD_TYPE=Release
+      cmake -DCMAKE_BUILD_TYPE=Release
 artifacts:
     - path: Exec
       name: Client Executable
