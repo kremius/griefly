@@ -6,11 +6,11 @@ environment:
 
 install:
     # Install SFML
-    - ps: wget http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip -Outfile SFML.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - ps: wget http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip -Outfile SFML.zip
     - cmd: 7z x SFML.zip
     - cmd: SET SFML_ROOT=%CD%\SFML-2.3
     # Install libpng
-    - ps: wget https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download -Outfile lpng1612.7z
+    - ps: wget https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download -Outfile lpng1612.7z -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
     - cmd: 7z x lpng1612.7z
     - cmd: SET PNG_INCLUDE_DIR=%CD%\lpng1612
     - cmd: SET PNG_LIBRARY_DIR=%CD%\lpng1612\projects\vstudio\Release
