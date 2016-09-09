@@ -5,20 +5,19 @@ environment:
     QT5DIR: C:\Qt\5.4
 
 install:
-    - cmd: choco install -y curl
     # Install SFML
-    - cmd: curl -OJL http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip
-    - cmd: 7z x SFML-2.3-windows-vc12-32-bit.zip
+    - ps: wget http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip -Outfile SFML.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - cmd: 7z x SFML.zip
     - cmd: SET SFML_ROOT=%CD%\SFML-2.3
     # Install libpng
-    - cmd: curl -OJL https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download
+    - ps: wget https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download -Outfile lpng1612.7z
     - cmd: 7z x lpng1612.7z
     - cmd: SET PNG_INCLUDE_DIR=%CD%\lpng1612
     - cmd: SET PNG_LIBRARY_DIR=%CD%\lpng1612\projects\vstudio\Release
     # Install zlib
-    - cmd: curl -OJL http://zlib.net/zlib128-dll.zip
+    - ps: wget http://zlib.net/zlib128-dll.zip -Outfile zlib128-dll.zip
     - cmd: 7z x zlib128-dll.zip -o%CD%\zlib128-dll
-    - cmd: curl -OJL http://zlib.net/zlib128.zip
+    - ps: wget http://zlib.net/zlib128.zip -Outfile zlib128.zip
     - cmd: 7z x zlib128.zip
     - cmd: SET ZLIB_ROOT=%CD%\zlib128-dll
     # Build libpng
