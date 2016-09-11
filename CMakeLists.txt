@@ -279,15 +279,14 @@ if(BUILD_TESTS)
                         "${gmock_SOURCE_DIR}/include")
     target_link_libraries(KVEngine gtest)
     target_link_libraries(KVEngine gmock)
+    if(MSVC)
+        set_target_properties(KVEngine PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:CONSOLE")
+    endif()
 endif()
 
 # Add opengl lib
 if(WIN32)
     target_link_libraries(KVEngine opengl32)
-    # Ensure console subsystem is set.
-    if(MSVC)
-        set_target_properties(KVEngine PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:CONSOLE")
-    endif()
 else()
     target_link_libraries(KVEngine GL)
 endif()
