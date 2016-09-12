@@ -36,6 +36,6 @@ artifacts:
 
 test_script:
     - cmd: cd Exec
-    - cmd: "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
+    - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
     - cmd: dumpbin /dependents KVEngine.exe
     - cmd: KVEngine.exe --run-tests
