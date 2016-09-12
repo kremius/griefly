@@ -36,4 +36,5 @@ artifacts:
 
 test_script:
     - cmd: cd Exec
+    - cmd: depends KVEngine.exe
     - cmd: KVEngine.exe --run-tests
