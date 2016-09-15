@@ -24,7 +24,7 @@ install:
 #    - cmd: cd lpng1612\projects\vstudio
 #    - cmd: msbuild vstudio.sln /p:Configuration=Release
 #    - cmd: cd %APPVEYOR_BUILD_FOLDER%
-    - ps: $packages = "libpng", "sfml-system", "sfml-audio"; $packages | foreach {nuget install $_ -Verbose}
+    - ps: $packages = "libpng", "sfml-system", "sfml-audio"; $packages | foreach {nuget install $_ -verbosity detailed}
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
 build_script:
