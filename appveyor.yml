@@ -24,7 +24,7 @@ install:
     - cmd: cd lpng1612\projects\vstudio
     - cmd: msbuild vstudio.sln /p:Configuration=Release
     - cmd: msbuild vstudio.sln /p:Configuration="Release Library"
-    - cmd: DIR /A Rel*
+    - cmd: DIR /A /S Rel*
     - cmd: cd %APPVEYOR_BUILD_FOLDER%
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
