@@ -24,13 +24,23 @@ install:
     - cmd: cd lpng1612\projects\vstudio
     - cmd: msbuild vstudio.sln /p:Configuration=Release
     - cmd: msbuild vstudio.sln /p:Configuration="Release Library"
-    - cmd: DIR /A /S Rel*
+    - cmd:
     - cmd: cd %APPVEYOR_BUILD_FOLDER%
     - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
 build_script:
     - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
     - cmd: cmake --build . --target install --config Release -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+
+# after_build:
+#     - cmd: CD %QT5DIR%\msvc2013_opengl
+#     - cmd: FOR %I IN (Qt5Network.dll Qt5OpenGL.dll Qt5Widgets.dll Qt5Gui.dll Qt5Core.dll) DO COPY %I %APPVEYOR_BUILD_FOLDER%\Exec
+#     - cmd: CD %APPVEYOR_BUILD_FOLDER%
+#     - cmd: COPY zlib128-dll\zlib1.dll Exec
+#     - cmd: COPY lpng1612\projects\vstudio\Release\libpng16.dll Exec
+#     - cmd: FOR %I IN (SFML-2.3\sfml-audio-2.dll SFML-2.3\sfml-system-2.dll) DO COPY %I %APPVEYOR_BUILD_FOLDER%\Exec
+
 
 artifacts:
     - path: Exec
