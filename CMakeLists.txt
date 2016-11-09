@@ -399,13 +399,13 @@ install(FILES ${CMAKE_BINARY_DIR}/metadata.json
 IF(WIN32)
     install(CODE "
     include(GetPrerequisites)
-    SET(KVENGINE_EXEC ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}KVEngine.exe)
-    MESSAGE(\"KVENGINE_EXEC=${KVENGINE_EXEC}\")
-    get_prerequisites(${KVENGINE_EXEC} DEPENDENCIES 0 0 \"\" \"\")
-    foreach(DEPENDENCY_FILE ${DEPENDENCIES})
-        gp_resolve_item(\"${KVENGINE_EXEC}\" \"${DEPENDENCY_FILE}\" \"\" \"\" resolved_file)
-        file(INSTALL ${resolved_file}
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    SET(KVENGINE_EXEC \${CMAKE_CURRENT_SOURCE_DIR}/\${EXEC_DIR}KVEngine.exe)
+    MESSAGE(\"KVENGINE_EXEC=\${KVENGINE_EXEC}\")
+    get_prerequisites(\${KVENGINE_EXEC} DEPENDENCIES 0 0 \"\" \"\")
+    foreach(DEPENDENCY_FILE \${DEPENDENCIES})
+        gp_resolve_item(\"\${KVENGINE_EXEC}\" \"\${DEPENDENCY_FILE}\" \"\" \"\" resolved_file)
+        file(INSTALL \${resolved_file}
+        DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/\${EXEC_DIR}/)
     endforeach()
 ")
 ENDIF()
