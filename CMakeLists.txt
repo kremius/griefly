@@ -7,6 +7,7 @@ option(BUILD_COVER "Generate test coverage" OFF)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 include(ClangFormat)
+include(GetPrerequisites)
 
 ##################################
 ### Start search dependencies
