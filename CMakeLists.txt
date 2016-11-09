@@ -408,7 +408,7 @@ IF(WIN32)
     foreach(DEPENDENCY_FILE \${DEPENDENCIES})
         gp_resolve_item(\"\${KVENGINE_EXEC}\" \"\${DEPENDENCY_FILE}\" \"\" \"\${LPNG_DLL}\" resolved_file)
         file(INSTALL \${resolved_file}
-        DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/)
+        DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec)
     endforeach()
 ")
 ENDIF()
