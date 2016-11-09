@@ -403,7 +403,7 @@ IF(WIN32)
     get_prerequisites(${KVENGINE_EXEC} DEPENDENCIES 0 0 \"\" \"\")
     foreach(DEPENDENCY_FILE ${DEPENDENCIES})
         gp_resolve_item(\"${KVENGINE_EXEC}\" \"${DEPENDENCY_FILE}\" \"\" \"\" resolved_file)
-        install(FILES ${resolved_file}
+        file(INSTALL ${resolved_file}
         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     endforeach()
 ")
