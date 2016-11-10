@@ -419,7 +419,7 @@ IF(WIN32)
             DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec)
     endforeach()
     # Platform dlls
-    file(GLOB PLATFORM_DLLS \"Exec/*.dll\")
+    file(GLOB PLATFORM_DLLS \"Exec/platform/*.dll\")
     foreach(PLATFORM_DLL \${PLATFORM_DLLS})
         get_prerequisites(\${PLATFORM_DLL} P_DEPENDS 1 1 \"\" \"\")
         foreach(P_DEPENDENCY \${P_DEPENDS})
