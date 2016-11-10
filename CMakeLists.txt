@@ -419,6 +419,15 @@ IF(WIN32)
             DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec)
     endforeach()
 
+    file(GLOB PLATFORM_DLLS \"Exec/*.dll\")
+    foreach(PLATFORM_DLL \${PLATFORM_DLLS})
+        get_prerequisites(\${PLATFORM_DLL} P_DEPENDS 1 1 \"\" \"\")
+        foreach(P_DEPENDENCY \${P_DEPENDS})
+            gp_resolve_item(\"\${PLATFORM_DLL}\" \"\${P_DEPENDENCY}\" \"\" \"\" resolved_file)
+            file(INSTALL \${resolved_file}
+                DESTINATION \${CMAKE_CURRENT_SOURCE_DIR})
+        endforeach()
+    endforeach()
 ")
 ENDIF()
 
