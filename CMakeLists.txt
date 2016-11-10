@@ -408,9 +408,9 @@ IF(WIN32)
         file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll\"
         DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
         file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll\"
-            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/platforms)
+            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
         file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll\"
-            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/platforms)
+            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
     ENDIF()
     get_prerequisites(\${KVENGINE_EXEC} DEPENDENCIES 1 1 \"\" \${DLL_DIRS})
     foreach(DEPENDENCY_FILE \${DEPENDENCIES})
