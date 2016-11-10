@@ -405,11 +405,11 @@ IF(WIN32)
         SET(SFML_DLL \${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin)
         SET(DLL_DIRS \"\${LPNG_DLL}\;\${SFML_DLL}\")
         # Install platforms dlls
-        file(INSTALL \"\${ENV{QT5DIR}}/msvc2013_opengl/plugins/platforms/qwindows.dll\"
+        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll\"
         DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
-        file(INSTALL \"\${ENV{QT5DIR}}/msvc2013_opengl/plugins/platforms/qoffscreen.dll\"
+        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll\"
             DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/platforms)
-        file(INSTALL \"\${ENV{QT5DIR}}/msvc2013_opengl/plugins/platforms/qminimal.dll\"
+        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll\"
             DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/platforms)
     ENDIF()
     get_prerequisites(\${KVENGINE_EXEC} DEPENDENCIES 1 1 \"\" \${DLL_DIRS})
