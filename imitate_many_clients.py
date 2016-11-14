@@ -6,7 +6,7 @@ import random
 TOTAL_BOTS = 5
 
 def main():
-    exe = "Exec/KVEngine.exe"
+    exe = "exec/KVEngine.exe"
     if sys.platform.startswith("linux"):
         exe = "./KVEngine"
     args = [exe, 'ip=grief.ly', '-nodraw', '-auto', '-auto_connect', 'login=Guest']

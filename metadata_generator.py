@@ -36,8 +36,12 @@ def parse_declare_saved_begin(file, class_and_base, filename):
                 raise ParseError("'ADD_TO_TYPELIST' does not match 'DECLARE_SAVED'")
             break
 
+    SUBDIR_NAME_CONST = "ources"
+    header_index = filename.find(SUBDIR_NAME_CONST) + len(SUBDIR_NAME_CONST) + 1
+    header = filename[header_index:]
+            
     class_entry = {"class" : class_name,
-                   "header" : filename,
+                   "header" : header,
                    "base_class" : base_class_name,
                    "type" : class_type,
                    "variables" : variables}
@@ -49,13 +53,13 @@ def parse_file(fullpath, filename):
     for line in file:
         result = extract_macros_params(line, "DECLARE_SAVED")
         if result:
-            parse_declare_saved_begin(file, result, filename)      
+            parse_declare_saved_begin(file, result, fullpath)      
 
 def path_equal(path1, path2):
     return os.path.abspath(path1) == os.path.abspath(path2)
 
 def main():
-    dir_name = "Sources"
+    dir_name = "sources"
     json_name = "metadata.json"
 
     if len(sys.argv) > 3:

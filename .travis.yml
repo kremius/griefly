@@ -21,13 +21,13 @@ before_script:
   - sleep 3
 script:
   - ./make.sh -DBUILD_TESTS=ON -DBUILD_COVER=ON -DCMAKE_BUILD_TYPE=Debug
-  - cd Exec
+  - cd exec
   - ./KVEngine --run-tests
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
   - lcov -c -d . -o coverage.info
   - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system code
-  - lcov --remove coverage.info 'Tests/*' --output-file coverage.info # remove tests from coverage
+  - lcov --remove coverage.info 'tests/*' --output-file coverage.info # remove tests from coverage
   - lcov --remove coverage.info '/griefly/build/*' --output-file coverage.info # remove gtest and generated code from coverage
   - lcov --list coverage.info # debug before upload
   - coveralls-lcov --repo-token=${COVERALLS_TOKEN} coverage.info # uploads to cov

@@ -11,6 +11,7 @@ const (
 	MsgidExit               = 2
 	MsgidHash               = 3
 	MsgidRestart            = 4
+	MsgidNextTick           = 5
 	MsgidSuccessfulConnect  = 201
 	MsgidMapUpload          = 202
 	MsgidNewTick            = 203
@@ -85,6 +86,8 @@ func getConcreteMessage(id uint32) Message {
 		return &MessageHash{}
 	case id == MsgidRestart:
 		return &MessageRestart{}
+	case id == MsgidNextTick:
+		return &MessageNextTick{}
 
 	case id == MsgidSuccessfulConnect:
 		return &MessageSuccessfulConnect{}
@@ -195,6 +198,13 @@ type MessageRestart struct {
 
 func (m *MessageRestart) TypeName() string {
 	return "MessageRestart"
+}
+
+type MessageNextTick struct {
+}
+
+func (m *MessageNextTick) TypeName() string {
+	return "MessageNextTick"
 }
 
 type MessageRequestHash struct {

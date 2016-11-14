@@ -11,19 +11,19 @@ Dependencies
 -------------
 1. Some C++ compiler (it works at least with compiler from **Visual Studio 2012** and **g++**)
 2. Qt5 (e.g., **Desktop Qt 5.4.0 MSVC2012 OpenGL 32bit**). Qt Creator is optional, but desired
-3. SFML 2.3
+3. SFML 2.*
 4. libpng
 5. zlib
 6. Python 2.7
-7. Go 1.6+ (https://golang.org/dl/)
+7. Golang 1.5+ (https://golang.org/dl/)
 8. Git
-9. CMake 2.8
+9. CMake 3.*
 
 How to build everything on Windows
 ----------------------------------
 _If you have any issues during the build process please report them_   
 
-It should be possible to build everything without Qt Cretor, but the guide assumes that Qt Creator is used.  
+It should be possible to build everything without Qt Creator, but the guide assumes that Qt Creator is used.  
 
 1. All tools and libs from the depencies list should be available on your machine
 2. Open CMakeLists.txt in Qt Creator  
@@ -39,16 +39,16 @@ It should be possible to build everything without Qt Cretor, but the guide assum
   If you cannot open the environment variables table (Qt Creator 3.\* does not allow that before successfull CMake generation) or prefer usual variables in CMake (Qt Creator 4.\* allows to use them in convenient way) then you can set them as `-DVARIABLE=VALUE` (e.g. `-DSFML_ROOT=C:\Users\Kremius\Documents\ExternalLibs\SFML-2.3`)
 4. Run CMake with param `-DCMAKE_BUILD_TYPE=Release` for Release verison.
 5. Build the project.  
-   Client executables will appear in the `Exec` folder, and the server executable will appear in the `griefly-server` folder.  
-   Client executables depend from various dlls (Qt, SFML), so it is needed to manually place them to the `Exec` folder.
+   Client executables will appear in the `exec` folder, and the server executable will appear in the `griefly-server` folder.  
+   Client executables depend from various dlls (Qt, SFML), so it is needed to manually place them to the `exec` folder.
 
 **Note:** It is supposed to perform build from an active git repository (`git describe --tags --abbrev=4` will be called during the process).
 
 How to build everything on Linux
 --------------------------------
 
-1. Install dependencies. Look at `travis-get-deps` rule in Makefile for clues.
-2. `make`. Built project will be placed under `Exec` directory. Server will be
+1. Install dependencies. Look into `.travis.yml` file for clues.
+2. `./make.sh`. Built project will be placed under `exec` directory. Server will be
    built in `gopath/src/griefly-server` directory.
 
 **Note:** It is supposed to perform build from an active git repository (`git describe --tags --abbrev=4` will be called during the process).  
@@ -66,7 +66,7 @@ How to run game without launcher
 Pass those command line parameters to `KVEngine` or `KVEngine.exe`:
 
 First (master) client:  
-`mapgen_name=brig_small.gen -auto_connect login=<admin login> password=<admin password>`  
+`mapgen_name=maps/brig_small.gen -auto_connect login=<admin login> password=<admin password>`  
 where `login` and `password` params values should match values in an auth database (by default `griefly-server/db/auth.json`)  
 Other clients:  
 `-auto_connect login=Guest`

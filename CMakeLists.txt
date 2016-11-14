@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(KVEngineQt)
 
 option(BUILD_TESTS "Build tests" OFF)
@@ -134,7 +134,7 @@ if(BUILD_TESTS)
         add_definitions(/D _VARIADIC_MAX=10)
     endif()
 
-    configure_file(Tests/CMakeLists.txt
+    configure_file(tests/CMakeLists.txt
                    googletest-download/CMakeLists.txt)
     execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
@@ -221,13 +221,13 @@ endif()
 ### Building client
 ###
 
-set(SOURCE_DIR Sources/)
-set(EXEC_DIR Exec/)
-set(TESTS_DIR Tests/)
+set(SOURCE_DIR sources/)
+set(EXEC_DIR exec/)
+set(TESTS_DIR tests/)
 
 include_directories(SOURCE_DIR)
 # Workaround for linux
-include_directories("Sources")
+include_directories("sources")
 
 if(BUILD_TESTS)
     file(GLOB_RECURSE TESTS "${TESTS_DIR}*.cpp" "${TESTS_DIR}*.h")
@@ -312,11 +312,11 @@ endif()
 ### Building launcher
 ###
 
-set(LAUNCHER_DIR Launcher/)
+set(LAUNCHER_DIR launcher/)
 
 include_directories(LAUNCHER_DIR)
 # Workaround for linux
-include_directories("Launcher")
+include_directories("launcher")
 
 file(GLOB_RECURSE LAUNCHER_SOURCES "${LAUNCHER_DIR}*.cpp")
 file(GLOB_RECURSE LAUNCHER_HEADERS "${LAUNCHER_DIR}*.h")
@@ -344,11 +344,11 @@ endif()
 ### Building qzipunpacker
 ###
 
-set(UNPACKER_DIR QzipUnpacker/)
+set(UNPACKER_DIR qzip_unpacker/)
 
 include_directories(UNPACKER_DIR)
 # Workaround for linux
-include_directories("QzipUnpacker")
+include_directories("qzip_unpacker")
 
 file(GLOB_RECURSE UNPACKER_SOURCES "${UNPACKER_DIR}*.cpp")
 

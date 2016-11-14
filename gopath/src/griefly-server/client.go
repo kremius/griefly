@@ -192,15 +192,15 @@ func (r *Registry) Run() {
 				continue
 			}
 
+			if r.handleForcedNextTick(m) {
+				continue
+			}
+
 			r.handleOOC(m)
 			r.handleGameMessage(m)
 
 		case now := <-r.ticker.C:
-			r.handleNewTick()
-			r.checkForHashStart(now)
-			r.checkHashes(now)
-			r.maybeSendConnCounter()
-			r.invokeNextTickCallbacks()
+			r.handleNewTick(now)
 
 		case newPlayer := <-r.newPlayers:
 			r.registerPlayer(newPlayer)
@@ -463,6 +463,18 @@ func (r *Registry) handleRestart(m *Envelope) bool {
 	return true
 }
 
+func (r *Registry) handleForcedNextTick(m *Envelope) bool {
+	if m.Kind == MsgidNextTick {
+		if user, ok := r.getPlayerByID(m.From); ok && user.userInfo.IsAdmin {
+			r.handleNewTick(time.Now())
+		}
+
+		return true
+	}
+
+	return false
+}
+
 func (r *Registry) handleOOC(m *Envelope) {
 	if m.Kind != MsgidOOCMessage {
 		return
@@ -493,7 +505,15 @@ func (r *Registry) handleGameMessage(m *Envelope) {
 	r.sendAll(m)
 }
 
-func (r *Registry) handleNewTick() {
+func (r *Registry) handleNewTick(now time.Time) {
+	r.sendNewTick()
+	r.checkForHashStart(now)
+	r.checkHashes(now)
+	r.maybeSendConnCounter()
+	r.invokeNextTickCallbacks()
+}
+
+func (r *Registry) sendNewTick() {
 	r.currentTick++
 	m := &MessageNewTick{}
 	e := NewEnvelope(m, MsgidNewTick, 0)
