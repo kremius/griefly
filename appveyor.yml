@@ -45,5 +45,4 @@ artifacts:
 
 test_script:
     - cmd: cd Exec
-    - cmd: START /B Launcher.exe
     - cmd: START KVEngine.exe --run-tests
