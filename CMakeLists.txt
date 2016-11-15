@@ -8,8 +8,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 include(ClangFormat)
 if (WIN32)
+        set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP ON)
     include(InstallRequiredSystemLibraries)
-    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 endif()
 
 ##################################
