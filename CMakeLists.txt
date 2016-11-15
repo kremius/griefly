@@ -405,14 +405,14 @@ install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
         COMPONENT Applications)
 
 IF(DEFINED ENV{APPVEYOR_BUILD_FOLDER}) # Are we building on Appveyor?
-    install(DIRECTORY $ENV{QT5DIR}/msvc2013_opengl/bin/
+    install(DIRECTORY "$ENV{QT5DIR}/msvc2013_opengl/bin/"
             DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
             FILES_MATCHING PATTERN "icu*53.dll")
-    install(FILES $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll
+    install(FILES "$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll"
          DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
-    file(INSTALL $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
+    file(INSTALL "$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll"
          DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
-    file(INSTALL $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
+    file(INSTALL "$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll"
          DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
 ENDIF()
 
