@@ -7,6 +7,9 @@ option(BUILD_COVER "Generate test coverage" OFF)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 include(ClangFormat)
+if (WIN32)
+    include(InstallRequiredSystemLibraries)
+endif()
 
 ##################################
 ### Start search dependencies
@@ -395,6 +398,10 @@ install(TARGETS KVEngine Launcher
 
 install(FILES ${CMAKE_BINARY_DIR}/metadata.json
         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+
+install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
+        COMPONENT Applications)
 
 IF(WIN32)
     install(CODE "

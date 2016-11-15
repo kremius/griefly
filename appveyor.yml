@@ -33,7 +33,8 @@ build_script:
     - cmd: cmake --build . --target install --config Release -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
-#after_build:
+after_build:
+    - ps: Get-ChildItem Exec
 #    - cmd: COPY zlib128-dll\zlib1.dll Exec
 #    - cmd: COPY SFML-2.3\sfml-system-2.dll Exec
 
