@@ -406,15 +406,18 @@ install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
 
 IF(DEFINED ENV{APPVEYOR_BUILD_FOLDER}) # Are we building on Appveyor?
     FILE(TO_CMAKE_PATH $ENV{QT5DIR} QT_DIR)
-    install(DIRECTORY ${QT_DIR}/msvc2013_opengl/bin/
-            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
-            FILES_MATCHING PATTERN "icu*53.dll")
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icudt53.dll
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuin53.dll
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuuc53.dll
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll
-         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
-    file(INSTALL ${QT_DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
-         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
-    file(INSTALL ${QT_DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
-         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
 ENDIF()
 
 IF(WIN32)
