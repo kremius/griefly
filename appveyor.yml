@@ -32,12 +32,10 @@ build_script:
     - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
     - cmd: cmake --build . --target install --config Release -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-
 after_build:
     - ps: Get-ChildItem Exec
 #    - cmd: COPY zlib128-dll\zlib1.dll Exec
 #    - cmd: COPY SFML-2.3\sfml-system-2.dll Exec
-
 
 artifacts:
     - path: Exec
@@ -45,4 +43,4 @@ artifacts:
 
 test_script:
     - cmd: cd Exec
-    - cmd: START KVEngine.exe --run-tests
+    - cmd: KVEngine.exe --run-tests
