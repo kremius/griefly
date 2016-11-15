@@ -9,6 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 include(ClangFormat)
 if (WIN32)
     include(InstallRequiredSystemLibraries)
+    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 endif()
 
 ##################################
@@ -403,6 +404,18 @@ install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
         COMPONENT Applications)
 
+IF(DEFINED ENV{APPVEYOR_BUILD_FOLDER}) # Are we building on Appveyor?
+    install(DIRECTORY $ENV{QT5DIR}/msvc2013_opengl/bin/
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
+            FILES_MATCHING PATTERN "icu*53.dll")
+    install(FILES $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll
+         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
+    file(INSTALL $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
+         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
+    file(INSTALL $ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
+         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms)
+ENDIF()
+
 IF(WIN32)
     install(CODE "
     include(GetPrerequisites)
@@ -411,13 +424,6 @@ IF(WIN32)
         SET(LPNG_DLL \${CMAKE_CURRENT_SOURCE_DIR}/lpng1612/projects/vstudio/Release)
         SET(SFML_DLL \${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin)
         SET(DLL_DIRS \"\${LPNG_DLL}\;\${SFML_DLL}\")
-        # Install platforms dlls
-        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll\"
-        DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
-        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll\"
-            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
-        file(INSTALL \"\$ENV{QT5DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll\"
-            DESTINATION \${CMAKE_CURRENT_SOURCE_DIR}/Exec/platforms)
     ENDIF()
     get_prerequisites(\${KVENGINE_EXEC} DEPENDENCIES 1 1 \"\" \${DLL_DIRS})
     foreach(DEPENDENCY_FILE \${DEPENDENCIES})
