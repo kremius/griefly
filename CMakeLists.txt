@@ -140,10 +140,17 @@ if(BUILD_TESTS)
 
     configure_file(tests/CMakeLists.txt
                    googletest-download/CMakeLists.txt)
-    execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-    execute_process(COMMAND ${CMAKE_COMMAND} --build .
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+        execute_process(COMMAND ${CMAKE_COMMAND} --build .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    ELSE()
+        execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=Release .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+        execute_process(COMMAND ${CMAKE_COMMAND} --build . --config Release
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    ENDIF()
 
     # Prevent GoogleTest from overriding our compiler/linker options
     # when building with Visual Studio
