@@ -140,7 +140,7 @@ if(BUILD_TESTS)
 
     configure_file(tests/CMakeLists.txt
                    googletest-download/CMakeLists.txt)
-    IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    IF(CMAKE_BUILD_TYPE MATCHES DEBUG) # Build gtest in release if so.
         execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
         execute_process(COMMAND ${CMAKE_COMMAND} --build .
