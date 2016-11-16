@@ -25,7 +25,7 @@ install:
   - cmd: SET ZLIB_ROOT=%CD%\zlib128-dll
   # Build libpng
   - cmd: cd lpng1612\projects\vstudio
-  - cmd: "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat x86"
+  - cmd: '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86'
   - cmd: msbuild vstudio.sln /p:Configuration=Release
   - cmd: msbuild vstudio.sln /p:Configuration="Release Library"
   - cmd:
