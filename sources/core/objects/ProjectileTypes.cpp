@@ -36,3 +36,10 @@ bool Laser::CheckPassable()
     Delete();
     return false;
 }
+void Laser::CheckObjectOnCreation()
+{
+    if (!GetOwner()->IsTransparent())
+    {
+        Projectile::CheckObjectOnCreation();
+    }
+}

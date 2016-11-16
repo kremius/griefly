@@ -85,6 +85,19 @@ bool Projectile::CheckHumanTile()
     }
     return false;
 }
+void Projectile::CheckObjectOnCreation()
+{
+    Rotate(movement_[0]);
+    auto tile = GetOwner();
+    if (!CanPass(tile->GetPassable(helpers::revert_dir(movement_[0])), passable_level) || !CanPass(tile->GetPassable(D_ALL), passable_level))
+    {
+        owner->RemoveItem(GetId());
+        GetNeighbour(helpers::revert_dir(movement_[0]))->AddItem(GetId());
+        tile->Bump(GetId());
+        Delete();
+        return;
+    }
+}
 
 bool Projectile::ProcessMovement()
 {

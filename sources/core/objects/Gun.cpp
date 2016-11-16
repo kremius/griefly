@@ -79,6 +79,7 @@ void Gun::ShootImpl(VDir target, const QString& sound,
             auto new_tile = tile->GetNeighbour(shooting_direction);
             auto projectile = Create<Projectile>(projectile_type, new_tile);
             projectile->MakeMovementPattern(target, facing);
+            projectile->CheckObjectOnCreation();
             PlaySoundIfVisible(sound, tile.Id());
             if (!casing_type.isEmpty())
             {

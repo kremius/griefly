@@ -19,6 +19,7 @@ public:
     Laser(quint32 id);
 
     virtual bool CheckPassable() override;
+    virtual void CheckObjectOnCreation() override;
 };
 ADD_TO_TYPELIST(Laser);
 
