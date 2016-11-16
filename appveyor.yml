@@ -23,9 +23,8 @@ install:
   # Build libpng
   - cmd: cd lpng1612\projects\vstudio
   - cmd: '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86'
-  - cmd: msbuild vstudio.sln /p:Configuration=Release
-  - cmd: msbuild vstudio.sln /p:Configuration="Release Library"
-  - cmd:
+  - cmd: msbuild vstudio.sln /tv:12.0 /p:Configuration=Release
+  - cmd: msbuild vstudio.sln /tv:12.0 /p:Configuration="Release Library"
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
 
