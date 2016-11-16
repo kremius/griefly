@@ -8,6 +8,9 @@ install:
   # Install SDL
   - ps: wget https://www.libsdl.org/release/SDL2-2.0.5-win32-x86.zip -Outfile SDL.zip
   - cmd: 7z x SDL.zip -o%CD%\exec
+  # Install SDL_Image
+  - ps: wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1-win32-x86.zip - Outgile SDL2_image.zip
+  - cmd: 7z x SDL2_image.zip -o%CD%\exec
   # Install SFML
   - ps: wget http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip -Outfile SFML.zip
   - cmd: 7z x SFML.zip
