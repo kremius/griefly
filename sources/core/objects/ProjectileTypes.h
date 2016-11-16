@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Projectiles.h"
+#include "../Helpers.h"
 
 class Bullet: public Projectile
 {

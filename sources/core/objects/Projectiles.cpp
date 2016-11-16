@@ -87,10 +87,18 @@ bool Projectile::CheckHumanTile()
 }
 void Projectile::CheckObjectOnCreation()
 {
-    Rotate(movement_[0]);
     auto tile = GetOwner();
+    auto neighbour = tile->GetNeighbour(helpers::revert_dir(movement_[0]));
+    if (!CanPass(neighbour->GetPassable(movement_[0]), passable_level))
+    {
+        Rotate(helpers::revert_dir(movement_[0]));
+        neighbour->Bump(GetId());
+        Delete();
+        return;
+    }
     if (!CanPass(tile->GetPassable(helpers::revert_dir(movement_[0])), passable_level) || !CanPass(tile->GetPassable(D_ALL), passable_level))
     {
+        Rotate(movement_[0]);
         owner->RemoveItem(GetId());
         GetNeighbour(helpers::revert_dir(movement_[0]))->AddItem(GetId());
         tile->Bump(GetId());
@@ -253,5 +261,9 @@ void Projectile::AfterWorldCreation()
 int Projectile::GetDamage()
 {
     return damage_;
+}
+Dir Projectile::GetZeroMove()
+{
+    return movement_[0];
 }
 

@@ -22,6 +22,7 @@ public:
     int GetDamage();
     virtual void CheckObjectOnCreation();
     virtual bool CheckPassable() override;
+    Dir GetZeroMove();
 protected:
     bool CheckHumanTile();
 
