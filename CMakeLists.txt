@@ -220,7 +220,7 @@ execute_process(
 ###
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -Wold-style-cast ${CMAKE_CXX_FLAGS}")
 endif()
 
 #SET(CMAKE_EXE_LINKER_FLAGS "/DEBUG")

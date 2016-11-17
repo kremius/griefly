@@ -7,6 +7,8 @@
 #define __forceinline __attribute__((always_inline)) inline
 #endif
 
+class IMainObject;
+
 extern QVector<QBitArray>* cast_table;
 
 __forceinline bool FastIsType(int typeto, int typefrom)
@@ -31,7 +33,7 @@ inline Typeto* CastTo(TypeObjectFrom* ptr)
     }
     if (FastIsType<Typeto>(ptr->RT_ITEM()))
     {
-        return reinterpret_cast<Typeto*>(ptr);
+        return static_cast<Typeto*>(static_cast<IMainObject*>(ptr));
     }
     return nullptr;
 }

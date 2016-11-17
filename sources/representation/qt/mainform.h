@@ -59,6 +59,7 @@ private:
     int argc_;
     char** argv_;
     Ui::MainForm *ui;
+    int fps_cap_;
 
     QMap<QString, QString> texts_;
 

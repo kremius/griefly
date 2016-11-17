@@ -23,6 +23,7 @@ public:
     virtual bool CheckPassable() override;
 protected:
     bool CheckHumanTile();
+    bool KV_SAVEBLE(harmless_);
 
     int KV_SAVEBLE(damage_);
 private:

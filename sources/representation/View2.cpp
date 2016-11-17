@@ -41,7 +41,7 @@ bool View2::FramesetState::IsTransp(int x, int y, int shift, int angle)
         return true;
     }
 
-    if (shift >= (int)GetMetadata()->dirs)
+    if (shift >= static_cast<int>(GetMetadata()->dirs))
     {
         shift = 0;
     }
@@ -225,8 +225,8 @@ void View2::LoadViewInfo(const ViewInfo& view_info)
     {
         const auto& new_overlays = view_info.GetOverlays();
         overlays_.resize(new_overlays.size());
-        int counter = 0;
-        int intermediate_size = std::min(info_.GetOverlays().size(), new_overlays.size());
+        unsigned int counter = 0;
+        unsigned int intermediate_size = std::min(info_.GetOverlays().size(), new_overlays.size());
         for (; counter < intermediate_size; ++counter)
         {
             if (!ViewInfo::FramesetInfo::IsSameSprites(
@@ -236,7 +236,7 @@ void View2::LoadViewInfo(const ViewInfo& view_info)
                 overlays_[counter].LoadFramesetInfo(new_overlays[counter]);
             }
         }
-        for (; counter < (int)new_overlays.size(); ++counter)
+        for (; counter < new_overlays.size(); ++counter)
         {
             overlays_[counter].LoadFramesetInfo(new_overlays[counter]);
         }
@@ -245,8 +245,8 @@ void View2::LoadViewInfo(const ViewInfo& view_info)
     {
         const auto& new_underlays = view_info.GetUnderlays();
         underlays_.resize(new_underlays.size());
-        int counter = 0;
-        int intermediate_size = std::min(info_.GetUnderlays().size(), new_underlays.size());
+        unsigned int counter = 0;
+        unsigned int intermediate_size = std::min(info_.GetUnderlays().size(), new_underlays.size());
         for (; counter < intermediate_size; ++counter)
         {
             if (!ViewInfo::FramesetInfo::IsSameSprites(
@@ -256,7 +256,7 @@ void View2::LoadViewInfo(const ViewInfo& view_info)
                 underlays_[counter].LoadFramesetInfo(new_underlays[counter]);
             }
         }
-        for (; counter < (int)new_underlays.size(); ++counter)
+        for (; counter < new_underlays.size(); ++counter)
         {
             underlays_[counter].LoadFramesetInfo(new_underlays[counter]);
         }

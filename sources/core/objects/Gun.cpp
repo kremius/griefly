@@ -76,10 +76,10 @@ void Gun::ShootImpl(VDir target, const QString& sound,
                 }
             }
             shooter->Rotate(shooting_direction);
-            auto new_tile = tile->GetNeighbour(shooting_direction);
-            auto projectile = Create<Projectile>(projectile_type, new_tile);
+            auto projectile = Create<Projectile>(projectile_type, tile);
             projectile->MakeMovementPattern(target, facing);
             PlaySoundIfVisible(sound, tile.Id());
+            projectile->Process();
             if (!casing_type.isEmpty())
             {
                 Dir dir = GetRand() % 4;

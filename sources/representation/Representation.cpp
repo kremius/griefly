@@ -270,7 +270,7 @@ void Representation::Click(int x, int y)
     auto& units = current_frame_->units;
 
 
-    for (int i = 0; i < (int)units.size(); ++i)
+    for (unsigned int i = 0; i < units.size(); ++i)
     {
         int bdir = units[i].shift;
         if (!interface_views_[i].IsTransp(x, y, bdir))

@@ -16,9 +16,12 @@ Laser::Laser(quint32 id) : Projectile(id)
 
 bool Laser::CheckPassable()
 {
-    if (CheckHumanTile())
+    if (!harmless_)
     {
-        return false;
+        if (CheckHumanTile())
+        {
+            return false;
+        }
     }
     auto tile = GetOwner();
     if (tile->IsTransparent())

@@ -42,10 +42,11 @@ Projectile::Projectile(quint32 id) : IMovable(id)
     damage_ = 0;
     SetSprite("icons/projectiles.dmi");
     v_level = 6;
-    current_step_ = 1;
+    current_step_ = 0;
     tickSpeed = 1;
     pixSpeed = 4;
     passable_level = Passable::SMALL_ITEM;
+    harmless_ = true;
 }
 void Projectile::Process()
 {
@@ -54,6 +55,7 @@ void Projectile::Process()
     {
         return;
     }
+    harmless_ = false;
     if (GetDir() != old_dir)
     {
         ProcessMovement();
@@ -61,10 +63,13 @@ void Projectile::Process()
 }
 
 bool Projectile::CheckPassable()
-{
-    if (CheckHumanTile())
+{   
+    if (!harmless_)
     {
-        return false;
+        if (CheckHumanTile())
+        {
+            return false;
+        }
     }
     if (IMovable::CheckPassable())
     {

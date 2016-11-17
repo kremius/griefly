@@ -32,7 +32,8 @@
 
 MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::MainForm)
+    ui(new Ui::MainForm),
+    fps_cap_(-1)
 {
     ui->setupUi(this);
 
@@ -126,6 +127,11 @@ void MainForm::startGameLoop(int id, QString map)
         NODRAW = true;
     }
 
+    if (GetParamsHolder().GetParamBool("-max_fps"))
+    {
+        fps_cap_ = GetParamsHolder().GetParam<int>("-max_fps");
+    }
+
     SetRepresentation(new Representation);
     connect(ui->widget, &QtOpenGL::focusLost,
     []()
@@ -179,19 +185,31 @@ void MainForm::startGameLoop(int id, QString map)
     QElapsedTimer process_performance;
     qint64 max_process_time = 0;
 
+    int time_per_frame_ms;
+    if (fps_cap_ <= 0)
+    {
+        time_per_frame_ms = 0;
+    }
+    else
+    {
+        time_per_frame_ms = 1000 / fps_cap_;
+    }
     while (true)
     {
-        ++fps_counter;
-
         process_performance.start();
         GetRepresentation().Process();
         GetScreen().Swap();
+        ++fps_counter;
         qint64 process_time = process_performance.nsecsElapsed();
         if (process_time > max_process_time)
         {
             max_process_time = process_time;
         }
-
+        int sleep_time = time_per_frame_ms - process_time / 1e6;
+        if (sleep_time > 0)
+        {
+            QThread::msleep(sleep_time);
+        }
         if (isHidden())
         {
             break;
@@ -202,15 +220,11 @@ void MainForm::startGameLoop(int id, QString map)
             addSystemText("FPS", "FPS: " + QString::number(fps_counter));
             addSystemText(
                 "{Perf}Represent",
-                  "Represent max: "
-                + QString::number(max_process_time / 1e6)
-                + " ms");
+                QString("Represent max: %1 ms").arg(max_process_time / 1e6));
             qint64 mutex_ns = GetRepresentation().GetPerformance().mutex_ns;
             addSystemText(
                 "{Perf}RepresentMutex",
-                  "Represent mutex lock max: "
-                + QString::number(mutex_ns / 1e6)
-                + " ms");
+                QString("Represent mutex lock max: %1 ms").arg(mutex_ns / 1e6));
             GetRepresentation().ResetPerformance();
             max_process_time = 0;
             fps_timer.restart();

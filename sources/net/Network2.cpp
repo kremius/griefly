@@ -293,9 +293,9 @@ bool SocketHandler::HandleHeader()
         return false;
     }
     message_size_ = qFromBigEndian<qint32>(
-        (const uchar*)&(buffer_.constData()[buffer_pos_]));
+        reinterpret_cast<const uchar*>(&(buffer_.constData()[buffer_pos_])));
     message_type_ = qFromBigEndian<qint32>(
-        (const uchar*)&(buffer_.constData()[buffer_pos_ + 4]));
+        reinterpret_cast<const uchar*>(&(buffer_.constData()[buffer_pos_ + 4])));
 
     buffer_pos_ += 8;
     reading_state_ = ReadingState::BODY;
@@ -313,7 +313,7 @@ bool SocketHandler::HandleBody()
     new_message.type = message_type_;
 
     new_message.json.append(net_codec_->toUnicode(
-        (const char*)&(buffer_.constData()[buffer_pos_]),
+        reinterpret_cast<const char*>(&(buffer_.constData()[buffer_pos_])),
         message_size_));
     buffer_pos_ += message_size_;
 
@@ -383,10 +383,10 @@ void SocketHandler::sendMessage(Message2 message)
     uchar temp[4];
 
     qToBigEndian(json.size(), temp);
-    data.append((char*)temp, 4);
+    data.append(reinterpret_cast<char*>(temp), 4);
 
     qToBigEndian(message.type, temp);
-    data.append((char*)temp, 4);
+    data.append(reinterpret_cast<char*>(temp), 4);
 
     data.append(json);
 
