@@ -417,25 +417,35 @@ install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
 IF(DEFINED ENV{APPVEYOR_BUILD_FOLDER}) # Are we building on Appveyor?
     FILE(TO_CMAKE_PATH $ENV{QT5DIR} QT_DIR)
     install(FILES ${QT_DIR}/msvc2013_opengl/bin/icudt53.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuin53.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuuc53.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
     install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
     install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Core.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Gui.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Network.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5OpenGL.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Widgets.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lpng1612/projects/vstudio/Release/libpng16.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/sfml-system-2.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/sfml-audio-2.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/OpenAL32.dll
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
 ENDIF()
 ###
 ### Install rules
