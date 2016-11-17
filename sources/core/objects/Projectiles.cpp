@@ -1,7 +1,7 @@
 #include "Projectiles.h"
 #include "../Helpers.h"
 
-std::ostream& operator<<(std::stringstream& file, const std::vector<Dir>& s)
+std::ostream& Projectiles::operator<<(std::stringstream& file, const std::vector<Dir>& s)
 {
     file << " " << s.size() << " ";
     for (auto it : s)
@@ -9,7 +9,7 @@ std::ostream& operator<<(std::stringstream& file, const std::vector<Dir>& s)
     return file;
 }
 
-std::istream& operator>>(std::stringstream& file, std::vector<Dir>& s)
+std::istream& Projectiles::operator>>(std::stringstream& file, std::vector<Dir>& s)
 {
     quint32 size;
     file >> size;
