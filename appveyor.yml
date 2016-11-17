@@ -41,6 +41,6 @@ artifacts:
   - path: Exec
     name: Client Executable
 
-test_script:
-  - cmd: cd Exec
-  - cmd: KVEngine.exe --run-tests
+#test_script:
+#  - cmd: cd Exec
+#  - cmd: KVEngine.exe --run-tests
