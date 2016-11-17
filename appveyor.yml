@@ -34,11 +34,13 @@ build_script:
 
 after_build:
   - ps: Get-ChildItem Exec
+#  - cmd: COPY zlib128-dll\zlib1.dll Exec
+#  - cmd: COPY SFML-2.3\sfml-system-2.dll Exec
 
 artifacts:
   - path: Exec
     name: Client Executable
 
-test_script:
-  - cmd: cd Exec
-  - cmd: KVEngine.exe --run-tests
+#test_script:
+#  - cmd: cd Exec
+#  - cmd: KVEngine.exe --run-tests
