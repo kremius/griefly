@@ -3,8 +3,8 @@
 #include "Movable.h"
 #include "Human.h"
 
-std::ostream& operator<<(std::stringstream& file, const std::vector<Dir>& content);
-std::istream& operator>>(std::stringstream& file, std::vector<Dir>& content);
+std::ostream& operator<<(std::stringstream& file, const std::vector<Dir> & content);
+std::istream& operator>>(std::stringstream& file, std::vector<Dir> & content);
 unsigned int hash(const std::vector<Dir>& content);
 
 class Projectile : public IMovable
