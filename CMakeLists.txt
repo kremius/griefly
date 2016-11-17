@@ -40,6 +40,9 @@ else()
     message(FATAL_ERROR "Unable to find Qt5Core!")
 endif()
 
+get_target_property(QtCore_location Qt5::Core LOCATION)
+message(STATUS "${QtCore_location}")
+
 find_package(Qt5Network REQUIRED)
 if(Qt5Network_FOUND)
     message(STATUS "Qt5Network has been found")
