@@ -39,3 +39,11 @@ bool Laser::CheckPassable()
     Delete();
     return false;
 }
+void Laser::CheckObjectOnCreation()
+{
+    auto neighbour = GetOwner()->GetNeighbour(helpers::revert_dir(GetZeroMove()));
+    if (!neighbour->IsTransparent() || !GetOwner()->IsTransparent())
+    {
+        Projectile::CheckObjectOnCreation();
+    }
+}

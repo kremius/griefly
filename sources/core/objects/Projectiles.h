@@ -20,7 +20,9 @@ public:
     virtual void ProcessForce() override {}
     void MakeMovementLoops(int d1_number, int d2_number, Dir d1, Dir d2);
     int GetDamage();
+    virtual void CheckObjectOnCreation();
     virtual bool CheckPassable() override;
+    Dir GetZeroMove();
 protected:
     bool CheckHumanTile();
     bool KV_SAVEBLE(harmless_);

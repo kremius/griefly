@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Projectiles.h"
+#include "../Helpers.h"
 
 class Bullet: public Projectile
 {
@@ -19,6 +20,7 @@ public:
     Laser(quint32 id);
 
     virtual bool CheckPassable() override;
+    virtual void CheckObjectOnCreation() override;
 };
 ADD_TO_TYPELIST(Laser);
 
