@@ -3,7 +3,7 @@
 #include <QGLWidget>
 #include <QDebug>
 
-bool Sprite::init(InitSprite data)
+bool Sprite::init(const InitSprite &data)
 {
     QImage image;
     if (!image.load(data.file))

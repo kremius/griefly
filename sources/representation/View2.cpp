@@ -93,8 +93,8 @@ void View2::FramesetState::Draw(quint32 shift, int x, int y, int angle)
     {
         shift = 0;
     }
-
-    int current_frame = GetMetadata()->frames_sequence[image_state_];
+	auto frame = GetMetadata()->frames_sequence;
+    int current_frame = frame[image_state_];
     int current_frame_pos = GetMetadata()->first_frame_pos + current_frame * GetMetadata()->dirs + shift;
 
     int image_state_h_ = current_frame_pos / GetSprite()->FrameW();
@@ -105,13 +105,11 @@ void View2::FramesetState::Draw(quint32 shift, int x, int y, int angle)
                       image_state_w_, image_state_h_,
                       static_cast<float>(angle));
 
-    if (GetMetadata()->frames_sequence.size() == 1)
+    if (frame.size() == 1)
     {
         return;
     }
-    if (GetMetadata()->frames_sequence
-            [(image_state_ + 1) % GetMetadata()->frames_sequence.size()]
-                == -1)
+    if (frame[(image_state_ + 1) % frame.size()] == -1)
     {
         return;
     }

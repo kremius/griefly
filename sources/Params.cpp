@@ -17,7 +17,7 @@ void ParamsHolder::ParseParams(int argc, char* argv[])
         else
         {
             key = str;
-            value = "";
+            value.clear();
         }
         params_[key] = value;
     }

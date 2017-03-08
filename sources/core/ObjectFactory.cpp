@@ -25,13 +25,6 @@ ObjectFactory::ObjectFactory(IGame* game)
 ObjectFactory::~ObjectFactory()
 {
     ProcessDeletion();
-    for (auto& info : objects_table_)
-    {
-        if (info.object)
-        {
-            delete info.object;
-        }
-    }
 }
 
 std::vector<ObjectInfo>& ObjectFactory::GetIdTable()
@@ -96,18 +89,20 @@ void ObjectFactory::ForeachProcess()
 
 void ObjectFactory::SaveMapHeader(FastSerializer& savefile)
 {
+	auto random = game_->GetRandom();
+	auto map = game_->GetMap();
     savefile << MAIN_TICK;
     savefile << id_;
 
     // Random save
-    savefile << game_->GetRandom().GetSeed();
-    savefile << game_->GetRandom().GetCallsCounter();
+    savefile << random.GetSeed();
+    savefile << random.GetCallsCounter();
 
     // Save Map Size
 
-    savefile << game_->GetMap().GetWidth();
-    savefile << game_->GetMap().GetHeight();
-    savefile << game_->GetMap().GetDepth();
+    savefile << map.GetWidth();
+    savefile << map.GetHeight();
+    savefile << map.GetDepth();
 
     // Save player table
     savefile << static_cast<quint32>(players_table_.size());
@@ -320,13 +315,6 @@ IMainObject* ObjectFactory::NewVoidObjectSaved(const QString& type)
 void ObjectFactory::Clear()
 {
     quint32 table_size = objects_table_.size();
-    for (quint32 i = 1; i < table_size; ++i)
-    {
-        if (objects_table_[i].object != nullptr)
-        {
-            delete objects_table_[i].object;
-        }
-    }
     if (table_size != objects_table_.size())
     {
         qDebug() << "WARNING: table_size != idTable_.size()!";
@@ -334,8 +322,6 @@ void ObjectFactory::Clear()
 
     ids_to_delete_.clear();
     process_table_.clear();
-    add_to_process_.clear();
-    players_table_.clear();
     add_to_process_.clear();
 
     id_ = 1;

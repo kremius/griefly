@@ -154,9 +154,10 @@ void HumanInterface::UpdateEnvironment()
     {
         if (IdPtr<CubeTile> t = human->GetOwner())
         {
-            int oxygen = t->GetAtmosHolder()->GetGase(OXYGEN);
-            int temperature = t->GetAtmosHolder()->GetTemperature();
-            int pressure = t->GetAtmosHolder()->GetPressure();
+			auto atmosholder = t->GetAtmosHolder();
+            int oxygen = atmosholder->GetGase(OXYGEN);
+            int temperature = atmosholder->GetTemperature();
+            int pressure = atmosholder->GetPressure();
 
             oxygen_.GetView()->SetState("oxy0");
             if (oxygen < 1)

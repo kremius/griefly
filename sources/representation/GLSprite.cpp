@@ -113,6 +113,7 @@ GLSprite::GLSprite(const QString& name)
     {
         fail_ = true;
         qDebug() << "Fail to load sprite " << name;
+		delete sprite; // Fixed for possibly memory leaks
         return;
     }
 

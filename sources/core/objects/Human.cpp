@@ -341,8 +341,9 @@ void Human::Live()
 
     if (IdPtr<CubeTile> t = owner)
     {
-        unsigned int oxygen = t->GetAtmosHolder()->GetGase(OXYGEN);
-        int temperature = t->GetAtmosHolder()->GetTemperature();
+		AtmosHolder* atmos = t->GetAtmosHolder();
+        unsigned int oxygen = atmos->GetGase(OXYGEN);
+        int temperature = atmos->GetTemperature();
         const int BURNING_THRESHOLD = 3;
         const int MIN_BURN_DAMAGE = 1;
         if (qAbs(REGULAR_TEMPERATURE - temperature) > BURNING_THRESHOLD)
@@ -352,8 +353,8 @@ void Human::Live()
         }
         if (oxygen > 0)
         {
-            t->GetAtmosHolder()->RemoveGase(OXYGEN, 1);
-            t->GetAtmosHolder()->AddGase(CO2, 1);
+            atmos->RemoveGase(OXYGEN, 1);
+            atmos->AddGase(CO2, 1);
             Regeneration();
         }
         else if (CalculateHealth() >= -1 * HUMAN_MAX_HEALTH)

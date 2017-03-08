@@ -87,8 +87,8 @@ MapEditorForm::MapEditorForm(QWidget *parent) :
 
         qDebug() << view_info;
 
-        if (   view_info->GetBaseFrameset().GetSprite() == ""
-            || view_info->GetBaseFrameset().GetState() == "")
+        if (   view_info->GetBaseFrameset().GetSprite().isEmpty()
+            || view_info->GetBaseFrameset().GetState().isEmpty())
         {
             qDebug() << "EMPTY frameset:" << it->first;
             continue;
@@ -105,15 +105,16 @@ MapEditorForm::MapEditorForm(QWidget *parent) :
             continue;
         }
 
+		int FrameW = view.GetBaseFrameset().GetSprite()->FrameW();
+		int FrameH = view.GetBaseFrameset().GetSprite()->FrameH();
         for (quint32 dir = 0; dir < view.GetBaseFrameset().GetMetadata()->dirs; ++dir)
         {
             int current_frame_pos = view.GetBaseFrameset().GetMetadata()->first_frame_pos + dir;
-
-            int image_state_h_ = current_frame_pos / view.GetBaseFrameset().GetSprite()->FrameW();
-            int image_state_w_ = current_frame_pos % view.GetBaseFrameset().GetSprite()->FrameW();
+			int image_state_h_ = current_frame_pos / FrameW;
+            int image_state_w_ = current_frame_pos % FrameW;
 
             QImage img = view.GetBaseFrameset().GetSprite()->GetSDLSprite()->frames
-                    [image_state_w_ * view.GetBaseFrameset().GetSprite()->FrameH() + image_state_h_];
+                    [image_state_w_ * FrameH  + image_state_h_];
 
             images.push_back(QPixmap::fromImage(img));
         }
@@ -149,7 +150,7 @@ MapEditorForm::~MapEditorForm()
     delete map_editor_;
 }
 
-void MapEditorForm::newSelectionSetted(int first_x, int first_y, int second_x, int second_y)
+void MapEditorForm::newSelectionSetted(int first_x, int first_y, int second_x, int second_y) // sceond_x , second_y not used ehm??
 {
     ui->cursor_label->setText(tr("(%1, %2)").arg(first_x).arg(first_y));
 

@@ -245,7 +245,7 @@ int LOSfinder::sign(int value)
     return 0;
 }
 
-bool LOSfinder::check_corner(PosPoint p)
+bool LOSfinder::check_corner(const PosPoint &p)
 {
     int x = corner2pos(p.posx);
     int y = corner2pos(p.posy);
@@ -254,19 +254,19 @@ bool LOSfinder::check_corner(PosPoint p)
 }
 
 
-PosPoint LOSfinder::corner_point2point(PosPoint p)
+PosPoint LOSfinder::corner_point2point(const PosPoint &p)
 {
     PosPoint retval(corner2pos(p.posx), corner2pos(p.posy), corner2pos(p.posz));
     return retval;
 }
 
-bool LOSfinder::is_transparent(PosPoint p)
+bool LOSfinder::is_transparent(const PosPoint &p)
 {
     PosPoint tilePoint = corner_point2point(p);
     return map_->IsTransparent(tilePoint.posx, tilePoint.posy, tilePoint.posz);
 }
 
-bool LOSfinder::bresen_x(PosPoint source, PosPoint target)
+bool LOSfinder::bresen_x(const PosPoint &source, const PosPoint &target)
 {
     int y = source.posy;
     int error = 0;
@@ -328,7 +328,7 @@ bool LOSfinder::bresen_x(PosPoint source, PosPoint target)
     return true;
 }
 
-bool LOSfinder::bresen_y(PosPoint source, PosPoint target)
+bool LOSfinder::bresen_y(const PosPoint &source, const PosPoint &target)
 {
     int x = source.posx;
     int error = 0;
@@ -391,7 +391,7 @@ bool LOSfinder::bresen_y(PosPoint source, PosPoint target)
     return true;
 }
 
-bool LOSfinder::ray_trace(PosPoint source, PosPoint target)
+bool LOSfinder::ray_trace(const PosPoint &source, const PosPoint &target)
 {
     // run Bresenham's line algorithm
     if (std::abs(source.posx - target.posx) > std::abs(source.posy - target.posy))
@@ -408,8 +408,8 @@ bool LOSfinder::ray_trace(PosPoint source, PosPoint target)
 
 void LOSfinder::mark_tiles_of_corner_as_visible(
         std::list<PosPoint>* retlist,
-        PosPoint at,
-        PosPoint center,
+        const PosPoint &at,
+        const PosPoint &center,
         char visibility[])
 {
     for (int dx = -1; dx <= 0; dx++)

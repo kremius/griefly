@@ -91,15 +91,16 @@ void Atmosphere::ProcessTileMove(int x, int y, int z)
 
     if (IsNonZero(force))
     {
-        if (tile->GetInsideList().size())
+		auto tilelist = tile->GetInsideList();
+        if (tilelist.size())
         {
-            auto i = tile->GetInsideList().rbegin();
-            while (   (i != tile->GetInsideList().rend())
+            auto i = tilelist.rbegin();
+            while (   (i != tilelist.rend())
                    && ((*i)->passable_level == Passable::EMPTY))
             {
                 ++i;
             }
-            if (i != tile->GetInsideList().rend())
+            if (i != tilelist.rend())
             {
                 (*i)->ApplyForce(force);
             }

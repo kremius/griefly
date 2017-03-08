@@ -21,16 +21,16 @@ private:
     int pos2corner(int pos);
     int corner2pos(int corner);
     int sign(int value);
-    bool check_corner(PosPoint p);
-    PosPoint corner_point2point(PosPoint p);
-    bool is_transparent(PosPoint p);
-    bool bresen_x(PosPoint source, PosPoint target);
-    bool bresen_y(PosPoint source, PosPoint target);
-    bool ray_trace(PosPoint source, PosPoint target);
+    bool check_corner(const PosPoint &p);
+    PosPoint corner_point2point(const PosPoint &p);
+    bool is_transparent(const PosPoint &p);
+    bool bresen_x(const PosPoint &source, const PosPoint &target);
+    bool bresen_y(const PosPoint &source, const PosPoint &target);
+    bool ray_trace(const PosPoint &source, const PosPoint &target);
     void mark_tiles_of_corner_as_visible(
             std::list<PosPoint>* retlist,
-            PosPoint at,
-            PosPoint center,
+			const PosPoint &at,
+			const PosPoint &center,
             char visibility[]);
     void Clear();
     std::list<PosPoint> worklist;

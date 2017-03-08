@@ -111,7 +111,7 @@ bool Projectile::ProcessMovement()
     return true;
 }
 
-void Projectile::MakeMovementPattern(VDir target, Dir facing)
+void Projectile::MakeMovementPattern(const VDir &target, Dir facing)
 {
     int x = target.x;
     int y = target.y;

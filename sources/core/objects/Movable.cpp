@@ -56,7 +56,7 @@ void IMovable::ProcessForce()
     force_.z -= (vstep.z * Friction::CombinedFriction(GetTurf())) / Friction::BASE_FRICTION;
 }
 
-void IMovable::ApplyForce(VDir force)
+void IMovable::ApplyForce(const VDir &force)
 {
     if (!IsNonZero(force))
         return;
