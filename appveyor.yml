@@ -1,0 +1,46 @@
+version: 1.0.{build}
+image: Visual Studio 2013
+
+environment:
+  QT5DIR: C:\Qt\5.4
+
+install:
+  # Install SFML
+  - ps: wget http://www.sfml-dev.org/files/SFML-2.3-windows-vc12-32-bit.zip -Outfile SFML.zip
+  - cmd: 7z x SFML.zip
+  - cmd: SET SFML_ROOT=%CD%\SFML-2.3
+  # Install libpng
+  - ps: wget https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.12/lpng1612.7z/download -Outfile lpng1612.7z -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+  - cmd: 7z x lpng1612.7z
+  - cmd: SET PNG_INCLUDE_DIR=%CD%\lpng1612
+  - cmd: SET PNG_LIBRARY_DIR=%CD%\lpng1612\projects\vstudio\Release
+  # Install zlib
+  - ps: wget http://zlib.net/zlib128-dll.zip -Outfile zlib128-dll.zip
+  - cmd: 7z x zlib128-dll.zip -o%CD%\zlib128-dll
+  - ps: wget http://zlib.net/zlib128.zip -Outfile zlib128.zip
+  - cmd: 7z x zlib128.zip
+  - cmd: SET ZLIB_ROOT=%CD%\zlib128-dll
+  # Build libpng
+  - cmd: cd lpng1612\projects\vstudio
+  - cmd: '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86'
+  - cmd: msbuild vstudio.sln /tv:12.0 /p:Configuration=Release
+  - cmd: msbuild vstudio.sln /tv:12.0 /p:Configuration="Release Library"
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%
+  - cmd: SET CMAKE_PREFIX_PATH=%QT5DIR%\msvc2013_opengl
+
+build_script:
+  - cmd: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=On
+  - cmd: cmake --build . --target install --config Release -- /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+after_build:
+  - ps: Get-ChildItem Exec
+#  - cmd: COPY zlib128-dll\zlib1.dll Exec
+#  - cmd: COPY SFML-2.3\sfml-system-2.dll Exec
+
+artifacts:
+  - path: Exec
+    name: Client Executable
+
+test_script:
+  - cmd: cd Exec
+  - cmd: KVEngine.exe --run-tests

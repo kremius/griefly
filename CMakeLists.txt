@@ -10,6 +10,10 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(UTILS_DIR utils/)
 
 include(ClangFormat)
+if (WIN32)
+        set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP ON)
+    include(InstallRequiredSystemLibraries)
+endif()
 
 ##################################
 ### Start search dependencies
@@ -38,6 +42,9 @@ if(Qt5Core_FOUND)
 else()
     message(FATAL_ERROR "Unable to find Qt5Core!")
 endif()
+
+get_target_property(QtCore_location Qt5::Core LOCATION)
+message(STATUS "${QtCore_location}")
 
 find_package(Qt5Network REQUIRED)
 if(Qt5Network_FOUND)
@@ -139,10 +146,17 @@ if(BUILD_TESTS)
 
     configure_file(tests/CMakeLists.txt
                    googletest-download/CMakeLists.txt)
-    execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-    execute_process(COMMAND ${CMAKE_COMMAND} --build .
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    IF(CMAKE_BUILD_TYPE MATCHES DEBUG) # Build gtest in release if so.
+        execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+        execute_process(COMMAND ${CMAKE_COMMAND} --build .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    ELSE()
+        execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=Release .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+        execute_process(COMMAND ${CMAKE_COMMAND} --build . --config Release
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+    ENDIF()
 
     # Prevent GoogleTest from overriding our compiler/linker options
     # when building with Visual Studio
@@ -425,6 +439,43 @@ install(TARGETS KVEngine Launcher
 install(FILES ${CMAKE_BINARY_DIR}/metadata.json
         DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
 
+install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/
+        COMPONENT Applications)
+
+IF(DEFINED ENV{APPVEYOR_BUILD_FOLDER}) # Are we building on Appveyor?
+    FILE(TO_CMAKE_PATH $ENV{QT5DIR} QT_DIR)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icudt53.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuin53.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/icuuc53.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qwindows.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qoffscreen.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/plugins/platforms/qminimal.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/platforms/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Core.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Gui.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Network.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5OpenGL.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${QT_DIR}/msvc2013_opengl/bin/Qt5Widgets.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR}/)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lpng1612/projects/vstudio/Release/libpng16.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/sfml-system-2.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/sfml-audio-2.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-2.3/bin/OpenAL32.dll
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${EXEC_DIR})
+ENDIF()
 ###
 ### Install rules
 #####################################
