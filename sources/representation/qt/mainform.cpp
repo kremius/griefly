@@ -99,7 +99,7 @@ MainForm::~MainForm()
 void MainForm::addSystemText(QString key, QString text)
 {
     texts_[key] = text;
-    if (text == "")
+    if (text.isEmpty())
     {
         texts_.remove(key);
     }
@@ -289,7 +289,7 @@ void MainForm::RemoveFirstBlockFromTextEditor()
 void MainForm::playMusic(QString name, float volume)
 {
     qDebug() << name << " " << volume;
-    if (name != "")
+    if (!name.isEmpty())
     {
         GetRepresentation().GetSoundPlayer().PlayMusic(name, volume);
     }

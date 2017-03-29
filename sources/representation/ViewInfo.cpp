@@ -99,8 +99,8 @@ bool ViewInfo::FramesetInfo::IsSameSprites(
 
 ViewInfo::FramesetInfo::FramesetInfo()
 {
-    sprite_name_ = "";
-    state_ = "";
+	sprite_name_.clear();
+	state_.clear();
     angle_ = 0;
     shift_x_ = 0;
     shift_y_ = 0;

@@ -59,7 +59,7 @@ Game::Game()
     cpu_loads_.resize(LOADS_AMOUNT);
     cpu_loads_id_ = 0;
 
-    ping_id_ = "";
+	ping_id_.clear();
 
     current_ping_ = 0;
 
@@ -198,11 +198,11 @@ void Game::Process()
             force_process_ns_ /= 2;
 
             timer.start();
-            if (ATMOS_OFTEN == 1 || MAIN_TICK % ATMOS_OFTEN == 1)
+            if (ATMOS_OFTEN == 1 || MAIN_TICK % ATMOS_OFTEN == 1) //ATMOS_OFTEN is always true
             {
                 GetMap().GetAtmosphere().Process();
             }
-            if (ATMOS_MOVE_OFTEN == 1 || MAIN_TICK % ATMOS_MOVE_OFTEN == 1)
+            if (ATMOS_MOVE_OFTEN == 1 || MAIN_TICK % ATMOS_MOVE_OFTEN == 1) // ATMOS_MOVE_OFTEN is always true
             {
                 GetMap().GetAtmosphere().ProcessMove();
             }

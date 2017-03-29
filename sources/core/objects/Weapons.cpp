@@ -11,7 +11,7 @@ LaserGun::LaserGun(quint32 id) : Gun(id)
     max_ammunition_ = 20;
 }
 
-void LaserGun::Shoot(VDir target)
+void LaserGun::Shoot(const VDir &target)
 {
     unsigned int value = GetRand() % 2;
     QString snd;
@@ -35,7 +35,7 @@ Revolver::Revolver(quint32 id) : Gun(id)
     max_ammunition_ = 6;
 }
 
-void Revolver::Shoot(VDir target)
+void Revolver::Shoot(const VDir &target) 
 {
     QString snd;
     snd = "Gunshot.wav";

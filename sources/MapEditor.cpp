@@ -201,13 +201,14 @@ void MapEditor::SaveMapgen(const QString& name)
         {
             for (int y = 0; y < size_y; ++y)
             {
-                if (editor_map_[x][y][z].turf.pixmap_item)
+				EditorEntry turf = editor_map_[x][y][z].turf;
+                if (turf.pixmap_item)
                 {
-                    data.WriteType(editor_map_[x][y][z].turf.item_type);
+                    data.WriteType(turf.item_type);
                     data << x;
                     data << y;
                     data << z;
-                    WrapWriteMessage(data, editor_map_[x][y][z].turf.variables);
+                    WrapWriteMessage(data, turf.variables);
                 }
                 auto& il = editor_map_[x][y][z].items;
                 for (auto it = il.begin(); it != il.end(); ++it)
@@ -459,9 +460,10 @@ void MapEditor::SetTurf(const QString &item_type)
     {
         for (int y = pointer_.first_posy; y <= pointer_.second_posy; ++y)
         {
-            scene_->removeItem(editor_map_[x][y][0].turf.pixmap_item);
+			auto editor = editor_map_[x][y][0];
+            scene_->removeItem(editor.turf.pixmap_item);
             delete editor_map_[x][y][0].turf.pixmap_item;
-            editor_map_[x][y][0].turf.pixmap_item = nullptr;
+            editor.turf.pixmap_item = nullptr;
         }
     }
 
@@ -480,10 +482,11 @@ void MapEditor::SetTurf(const QString &item_type)
 
 MapEditor::EditorEntry& MapEditor::SetTurf(const QString &item_type, int posx, int posy, int posz)
 {
-    if (editor_map_[posx][posy][posz].turf.pixmap_item != nullptr)
+	auto turf = editor_map_[posx][posy][posz].turf;
+    if (turf.pixmap_item != nullptr)
     {
-        scene_->removeItem(editor_map_[posx][posy][posz].turf.pixmap_item);
-        delete editor_map_[posx][posy][posz].turf.pixmap_item;
+        scene_->removeItem(turf.pixmap_item);
+        delete turf.pixmap_item;
     }
 
     EditorEntry new_entry;

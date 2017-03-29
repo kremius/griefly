@@ -8,7 +8,7 @@ Table::Table(quint32 id) : IMovable(id)
     v_level = 4;
     SetPassable(D_ALL, Passable::SMALL_CREATURE);
     SetSprite(""); 
-    material_ = "";
+	material_.clear();
     SetState(material_ + "_table_d0");
 }
 
