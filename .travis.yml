@@ -4,8 +4,7 @@
 #    - os: linux
 #      sudo: required
 #      dist: trusty
-os:
-  - osx
+os: osx
 
 language: cpp 
 
