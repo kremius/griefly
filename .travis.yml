@@ -4,9 +4,8 @@
 #    - os: linux
 #      sudo: required
 #      dist: trusty
-os: osx
-
-osx_image: xcode8.3 # Not sure if this is strictly needed
+os:
+  - osx
 
 language: cpp 
 
@@ -34,11 +33,10 @@ install:
     export CMAKE_PREFIX_PATH=/opt/qt58/;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    brew update;
-    brew outdated gimme || brew install gimme; # Don't think this is available by default on TravisCI OSX images
     eval "$(gimme 1.6)";
-    brew outdated qt5.8 || brew install qt5.8;
-    brew outdated lcov || brew install lcov;
+    brew update;
+    brew install qt@5.8;
+    brew install lcov;
     gem install coveralls-lcov;
     sudo /opt/qt58/bin/qt58-env.sh;
     export CMAKE_PREFIX_PATH=/opt/qt58/;
