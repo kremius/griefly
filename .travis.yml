@@ -33,9 +33,10 @@ install:
     export CMAKE_PREFIX_PATH=/opt/qt58/;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    eval "$(gimme 1.6)";
     brew update;
-    brew install qt@5.8;
+    brew install gimme;
+    eval "$(gimme 1.6)";
+    brew install qt5.8;
     brew install lcov;
     gem install coveralls-lcov;
     sudo /opt/qt58/bin/qt58-env.sh;
