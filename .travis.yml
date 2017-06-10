@@ -6,6 +6,8 @@
 #      dist: trusty
 os: osx
 
+oxs_image: xcode8.3 # Not sure if this is strictly needed
+
 language: cpp 
 
 sudo: required
