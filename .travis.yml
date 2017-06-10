@@ -35,10 +35,10 @@ install:
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew update;
-    brew install gimme; # Don't think this is available by default on TravisCI OSX images
+    brew outdated gimme || brew install gimme; # Don't think this is available by default on TravisCI OSX images
     eval "$(gimme 1.6)";
-    brew install qt5.8;
-    brew install lcov;
+    brew outdated qt5.8 || brew install qt5.8;
+    brew outdated lcov || brew install lcov;
     gem install coveralls-lcov;
     sudo /opt/qt58/bin/qt58-env.sh;
     export CMAKE_PREFIX_PATH=/opt/qt58/;
