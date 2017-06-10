@@ -6,8 +6,6 @@
 #      dist: trusty
 os: osx
 
-osx_image: xcode8.3
-
 language: cpp 
 
 sudo: required
