@@ -37,7 +37,6 @@ install:
     brew install gimme;
     eval "$(gimme 1.6)";
     brew install qt;
-    # Debug code to see what environment variables need changing
     brew info qt;
     brew install lcov;
     gem install coveralls-lcov;
