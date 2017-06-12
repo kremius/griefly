@@ -36,7 +36,9 @@ install:
     brew update;
     brew install gimme;
     eval "$(gimme 1.6)";
-    brew install qt5.8;
+    brew install qt;
+    # Debug code to see what environment variables need changing
+    brew info qt;
     brew install lcov;
     gem install coveralls-lcov;
     sudo /opt/qt58/bin/qt58-env.sh;
