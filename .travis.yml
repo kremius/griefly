@@ -40,13 +40,15 @@ install:
     brew info qt;
     brew install lcov;
     gem install coveralls-lcov;
-    sudo /opt/qt58/bin/qt58-env.sh;
     export CMAKE_PREFIX_PATH=/opt/qt58/;
+    export PATH="/usr/local/opt/qt/bin:$PATH";
+    export LDFLAGS="-L/usr/local/opt/qt/lib";
+    export CPPFLAGS="-I/usr/local/opt/qt/include";
     fi
     
 before_script:
   - "export DISPLAY=:99.0"
-  - Xvfb
+  - sudo Xvfb :99 -ac -screen 0 1024x768x8
   - sleep 3
   
 script:
