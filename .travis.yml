@@ -36,9 +36,9 @@ install:
     brew info qt;
     brew install lcov;
     gem install coveralls-lcov;
-    mdfind -name gcov;
     export CMAKE_PREFIX_PATH=/opt/qt58/;
     export PATH="/usr/local/opt/qt/bin:$PATH";
+    export PATH="/usr/local/Cellar/gcc@4.9/4.9.3/bin:$PATH";
     export LDFLAGS="-L/usr/local/opt/qt/lib";
     export CPPFLAGS="-I/usr/local/opt/qt/include";
     fi
