@@ -144,7 +144,7 @@ void LoginMob::ProcessMessage(const Message2& msg)
 
         MoveMindTo(human);
 
-        GetGame().GetChat().PostHtmlFor(text, human);
+        PostHtmlFor(text, human);
 
         qDebug() << "End human creation in LoginMob";
         Delete();

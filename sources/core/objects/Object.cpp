@@ -87,6 +87,22 @@ unsigned int Object::GetRand()
     return GetGame().GetRandom().GetRand();
 }
 
+void Object::PostHtmlFor(const QString& html, IdPtr<Object> uncasted_mob)
+{
+    if (IdPtr<Mob> mob = uncasted_mob)
+    {
+        if (mob->IsMinded())
+        {
+            GetGame().GetChatFrameInfo().PostPersonal(html, GetGame().GetNetId(mob.Id()));
+        }
+    }
+}
+
+void Object::PostVisible(const QString& html, const Position& place)
+{
+    GetGame().GetChatFrameInfo().PostVisible(html, place);
+}
+
 quint32 Object::CreateImpl(const QString& type, quint32 owner)
 {
     return GetFactory().CreateImpl(type, owner);

@@ -216,14 +216,14 @@ void Human::ProcessMessage(const Message2 &msg)
         {
             if (IdPtr<Human> human = object)
             {
-                GetGame().GetChat().PostSimpleText(
+                PostVisible(
                     name + " looks at " + human->name,
-                    GetOwner().Id());
+                    GetPosition());
                 return;
             }
-            GetGame().GetChat().PostSimpleText(
+            PostVisible(
                 name + " looks at the " + object->name,
-                GetOwner().Id());
+                GetPosition());
             return;
         }
         if (action == Click::LEFT_CONTROL)
@@ -293,8 +293,7 @@ void Human::ProcessMessage(const Message2 &msg)
                 {
                     return;
                 }
-                GetGame().GetChat().PostHtmlFor(
-                    AtmosTool::GetHtmlInfo(*tile->GetAtmosHolder()), GetId());
+                PostHtmlFor(AtmosTool::GetHtmlInfo(*tile->GetAtmosHolder()), GetId());
             }
         }
     }
@@ -335,14 +334,14 @@ void Human::SetLying(bool value)
     lying_ = value;
     if (lying_)
     {
-        GetGame().GetChat().PostSimpleText(name + " is lying now", GetOwner()->GetId());
+        PostVisible(name + " is lying now", GetPosition());
         view_.SetAngle(90);
         SetPassable(Dir::ALL, passable::FULL);
         v_level = 8;
     }
     else
     {
-        GetGame().GetChat().PostSimpleText(name + " is standing now!", GetOwner()->GetId());
+        PostVisible(name + " is standing now!", GetPosition());
         view_.SetAngle(0);
         SetPassable(Dir::ALL, passable::BIG_ITEM);
         v_level = 9;
@@ -472,7 +471,10 @@ void Human::AttackBy(IdPtr<Item> item)
         PlaySoundIfVisible(sound);
         if (IdPtr<MaterialObject> item_owner = item->GetOwner())
         {
-            GetGame().GetChat().PostDamage(item_owner->name, name, item->name, GetOwner().Id());
+            PostVisible(
+                QString("<font color=\"red\">%1 is attacked by %2 with %3</font>")
+                    .arg(name).arg(item_owner->name).arg(item->name),
+                GetPosition());
         }
 
         damaged = true;
@@ -488,7 +490,7 @@ void Human::AttackBy(IdPtr<Item> item)
         {
             SetLying(true);
             AddLyingTimer(100);
-            GetGame().GetChat().PostSimpleText(name + " has been knocked out!", GetOwner()->GetId());
+            PostVisible(name + " has been knocked out!", GetPosition());
         }
 
         damaged = true;
@@ -538,8 +540,8 @@ void Human::Bump(IdPtr<Movable> item)
     {
         ApplyBruteDamage(projectile->GetDamage() * 100);
         ApplyBurnDamage(projectile->GetBurnDamage() * 100);
-        GetGame().GetChat().PostSimpleText(
-            name + " got hit by a " + projectile->name + "!", GetRoot().Id());
+        PostVisible(
+            name + " got hit by a " + projectile->name + "!", GetPosition());
 
         // TODO (?): sound
         return;

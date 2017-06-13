@@ -567,7 +567,7 @@ void Game::ProcessInputMessages()
             QJsonObject obj = Network2::ParseJson(msg);
             QString login = obj["login"].toString();
             QString text = obj["text"].toString();
-            GetChat().PostOOCText(login, text);
+            PostOoc(login, text);
             continue;
         }
 
@@ -774,6 +774,22 @@ void Game::AddBuildInfo(QByteArray* data)
     QString system_info("Build info: %1, Qt: %2");
     system_info = system_info.arg(GetBuildInfo()).arg(GetQtVersion());
     data->append(system_info);
+}
+
+void Game::PostOoc(const QString& who, const QString& text)
+{
+    QString escaped_who = who.toHtmlEscaped();
+    QString escaped_text = text.toHtmlEscaped();
+
+    const QString post_text
+        = QString("<font color=\"blue\"><b>%1</b>: <span>%2</span></font>")
+                .arg(escaped_who).arg(escaped_text);
+
+    const auto& players = GetGlobals()->players_table;
+    for (auto it = players.begin(); it != players.end(); ++it)
+    {
+        GetChatFrameInfo().PostPersonal(post_text, it.key());
+    }
 }
 
 void Game::ProcessBroadcastedMessages()

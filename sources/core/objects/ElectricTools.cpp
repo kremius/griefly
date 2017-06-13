@@ -15,7 +15,7 @@ AtmosTool::AtmosTool()
     name = "Atmos tool";
 }
 
-QString AtmosTool::GetHtmlInfo(atmos::AtmosHolder& holder)
+QString AtmosTool::GetHtmlInfo(const atmos::AtmosHolder& holder)
 {
     QString retval;
 
@@ -47,9 +47,9 @@ void AtmosTool::AttackBy(IdPtr<Item> item)
 {
     if (item.Id() == GetId())
     {
-        if (IdPtr<CubeTile> ct = GetOwner()->GetOwner())
+        if (IdPtr<CubeTile> tile = GetOwner()->GetOwner())
         {
-            GetGame().GetChat().PostHtmlFor(GetHtmlInfo(*ct->GetAtmosHolder()), GetOwner());
+            PostHtmlFor(GetHtmlInfo(*tile->GetAtmosHolder()), GetOwner());
         }
     }
 }

@@ -23,9 +23,9 @@ PipeBase::PipeBase()
 
 void PipeBase::AttackBy(IdPtr<Item> item)
 {
-    if (IdPtr<AtmosTool> at = item)
+    if (IdPtr<AtmosTool> tool = item)
     {
-        GetGame().GetChat().PostHtmlFor(AtmosTool::GetHtmlInfo(atmos_holder_), at->GetOwner());
+        PostHtmlFor(AtmosTool::GetHtmlInfo(atmos_holder_), tool->GetOwner());
         return;
     }
 }

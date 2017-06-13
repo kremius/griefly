@@ -78,6 +78,8 @@ private:
 
     void AddBuildInfo(QByteArray* data);
 
+    void PostOoc(const QString& who, const QString& text);
+
     FastSerializer serializer_;
 
     std::vector<Message2> messages_log_;

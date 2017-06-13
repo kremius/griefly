@@ -14,7 +14,7 @@ public:
     REGISTER_CLASS_AS(AtmosTool);
     AtmosTool();
 
-    static QString GetHtmlInfo(atmos::AtmosHolder& holder);
+    static QString GetHtmlInfo(const atmos::AtmosHolder& holder);
 
     virtual void AttackBy(IdPtr<Item> item) override;
 };

@@ -98,24 +98,24 @@ namespace atmos
         UpdateMacroParams();
     }
 
-    int AtmosHolder::GetEnergy()
+    int AtmosHolder::GetEnergy() const
     {
         return data_ptr_->energy;
     }
-    int AtmosHolder::GetPressure()
+    int AtmosHolder::GetPressure() const
     {
         return data_ptr_->pressure;
     }
-    int AtmosHolder::GetTemperature()
+    int AtmosHolder::GetTemperature() const
     {
         return data_ptr_->temperature;
     }
-    int AtmosHolder::GetVolume()
+    int AtmosHolder::GetVolume() const
     {
         return data_ptr_->volume;
     }
 
-    int AtmosHolder::GetGase(int gase)
+    int AtmosHolder::GetGase(int gase) const
     {
         return data_ptr_->gases[gase];
     }

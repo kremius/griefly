@@ -43,11 +43,11 @@ namespace atmos
         void AddEnergy(int energy);
         void AddGase(int gase, int amount);
         void SetVolume(int volume);
-        int GetEnergy();
-        int GetPressure();
-        int GetTemperature();
-        int GetVolume();
-        int GetGase(int gase);
+        int GetEnergy() const;
+        int GetPressure() const;
+        int GetTemperature() const;
+        int GetVolume() const;
+        int GetGase(int gase) const;
 
         int RemoveGase(int gase, int amount);
 

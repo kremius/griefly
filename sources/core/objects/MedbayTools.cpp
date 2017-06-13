@@ -16,37 +16,40 @@ void HealthAnalyzer::Scan(IdPtr<Human> target)
     float burn = target->GetBurnDamage() / 100.0f;
     float brute = target->GetBruteDamage() / 100.0f;
 
-    GetGame().GetChat().PostHtmlFor(
+    // TODO: that should done with one call of PostHtmlFor
+    // Just one big string should be made
+
+    PostHtmlFor(
         QString("<b>Analyzing results for %1:</b>").arg(target->name.toHtmlEscaped()),
         GetOwner());
-    GetGame().GetChat().PostTextFor("Overall status:", GetOwner());
+    PostHtmlFor("Overall status:", GetOwner());
 
     QString healthy = QString("<b>%1%</b> healthy").arg(health);
     QString deceased("<b><font color=\"red\">Deceased</font></b>");
 
-    GetGame().GetChat().PostHtmlFor(target->IsDead() ? deceased : healthy, GetOwner());
+    PostHtmlFor(target->IsDead() ? deceased : healthy, GetOwner());
     if (target->GetBruteDamage() > HUMAN_MAX_HEALTH / 10)
     {
         QString level = target->GetBruteDamage() > (HUMAN_MAX_HEALTH / 2) ? "Severe" : "Minor";
-        GetGame().GetChat().PostHtmlFor(
+        PostHtmlFor(
             QString("%1 <font color=\"red\">tissue damage</font> detected.").arg(level),
             GetOwner());
     }
     if (target->GetBurnDamage() > HUMAN_MAX_HEALTH / 10)
     {
         QString level = target->GetBurnDamage() > (HUMAN_MAX_HEALTH / 2) ? "Severe" : "Minor";
-        GetGame().GetChat().PostHtmlFor(
+        PostHtmlFor(
             QString("%1 <font color=\"#7f8200\">burn damage</font> detected.").arg(level),
             GetOwner());
     }
     if (target->GetSuffocationDamage() > HUMAN_MAX_HEALTH / 10)
     {
         QString level = target->GetSuffocationDamage() > HUMAN_MAX_HEALTH / 2 ? "Severe" : "Minor";
-        GetGame().GetChat().PostHtmlFor(
+        PostHtmlFor(
             QString("%1 <font color=\"blue\">oxygen deprivation</font> detected.").arg(level),
             GetOwner());
     }
-    GetGame().GetChat().PostHtmlFor(
+    PostHtmlFor(
         QString("Damage: <font color=\"red\">Brute</font>-"
                 "<font color=\"#7f8200\">Burn</font>-"
                 "<font color=\"blue\">Suffocation</font>"

@@ -41,9 +41,9 @@ void GasTank::AfterWorldCreation()
 
 void GasTank::AttackBy(IdPtr<Item> item)
 {
-    if (IdPtr<AtmosTool> at = item)
+    if (IdPtr<AtmosTool> tool = item)
     {
-        GetGame().GetChat().PostHtmlFor(AtmosTool::GetHtmlInfo(atmos_holder_), at->GetOwner());
+        PostHtmlFor(AtmosTool::GetHtmlInfo(atmos_holder_), tool->GetOwner());
         return;
     }
 
@@ -65,14 +65,14 @@ void GasTank::AttackBy(IdPtr<Item> item)
 
 void GasTank::Open()
 {
-    GetGame().GetChat().PostSimpleText(name + " is open", GetOwner().Id());
+    PostVisible(name + " is open", GetPosition());
 
     open_ = true;
 }
 
 void GasTank::Close()
 {
-    GetGame().GetChat().PostSimpleText(name + " is closed", GetOwner().Id());
+    PostVisible(name + " is closed", GetPosition());
 
     open_ = false;
 }
