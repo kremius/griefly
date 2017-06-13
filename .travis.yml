@@ -39,6 +39,7 @@ install:
     export CMAKE_PREFIX_PATH=/opt/qt58/;
     export PATH="/usr/local/opt/qt/bin:$PATH";
     export PATH="/usr/local/Cellar/gcc@4.9/4.9.3/bin:$PATH";
+    sudo ln -s /usr/local/Cellar/gcc@4.9/4.9.3/bin/gcov-4.9 /usr/local/Cellar/gcc@4.9/4.9.3/bin/gcov;
     export LDFLAGS="-L/usr/local/opt/qt/lib";
     export CPPFLAGS="-I/usr/local/opt/qt/include";
     fi
