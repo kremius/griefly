@@ -43,7 +43,7 @@ How to build everything on Linux
 4. `./make.sh`. Built project will be placed under `exec` directory. Server will be
    built in `gopath/src/griefly-server` directory.
 
-**Note:** It's supposed to be bult from an active git repository (`git describe --tags --abbrev=4` will be called during the process) -- if you recieve a `fatal: Not a git repository` error, fix with `git init`.
+**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process) -- if you recieve a `fatal: Not a git repository` error, then `git init` will surpress the issue, but will interfere with network connections.
 **Note:** gccgo is not supported! The current `FindGo.cmake` cannot parse the gccgo version string, so you will obtain an error. Use the official version instead.  
 **Note:** There may be some issues with CMake 3.0.2, so try to update your CMake if issues appear.  
 
