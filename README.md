@@ -31,7 +31,7 @@ It should be possible to build everything without Qt Creator, but the guide assu
    Client executables will appear in the `exec` folder, and the server executable will appear in the `griefly-server` folder.  
    Client executables depend from various dlls, so it is needed to manually place them to the `exec` folder.
 
-**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process).
+**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process), otherwise it won't compile.  
 
 How to build everything on Linux
 --------------------------------
@@ -43,7 +43,7 @@ How to build everything on Linux
 4. `./make.sh`. Built project will be placed under `exec` directory. Server will be
    built in `gopath/src/griefly-server` directory.
 
-**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process).  
+**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process), otherwise it won't compile.  
 **Note:** gccgo is not supported! The current `FindGo.cmake` cannot parse the gccgo version string, so you will obtain an error. Use the official version instead.  
 **Note:** There may be some issues with CMake 3.0.2, so try to update your CMake if issues appear.  
 
