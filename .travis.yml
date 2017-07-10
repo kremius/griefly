@@ -15,6 +15,10 @@ before_install:
   - export CXX="g++-4.9"
   
 install:
+    # Use the following commands one after the other to install everything on Arch using Pacaur:
+    # $ sudo pacman -S git qt5-base qt5-multimedia go python2 mesa gcc && 
+    # $ pacaur -y lcov && 
+    # $ gem install coveralls-lcov
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     eval "$(gimme 1.6)";
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
