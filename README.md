@@ -36,14 +36,14 @@ It should be possible to build everything without Qt Creator, but the guide assu
 How to build everything on Linux
 --------------------------------
 
-1. Install dependencies. Look into `.travis.yml` file for clues. 
+1. Install dependencies. Look into `.travis.yml` file for clues. (For Arch Linux: All dependencies can be installed with ` sudo pacman -S git qt5-base qt5-multimedia go python2 mesa gcc && gem install coveralls-lcov`)
 2. `cd` into installation directory.
 3. `git clone https://github.com/griefly/griefly.git`
 4. `cd griefly`
 4. `./make.sh`. Built project will be placed under `exec` directory. Server will be
    built in `gopath/src/griefly-server` directory.
 
-**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process) -- if you recieve a `fatal: Not a git repository` error, then `git init` will surpress the issue, but will interfere with network connections.
+**Note:** It's supposed to be built from an active git repository (`git describe --tags --abbrev=4` will be called during the process).  
 **Note:** gccgo is not supported! The current `FindGo.cmake` cannot parse the gccgo version string, so you will obtain an error. Use the official version instead.  
 **Note:** There may be some issues with CMake 3.0.2, so try to update your CMake if issues appear.  
 
