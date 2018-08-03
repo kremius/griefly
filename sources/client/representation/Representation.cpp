@@ -398,7 +398,7 @@ int GetPixelSpeedForDistance(int distance)
         return 0;
     }
 
-    distance = std::abs(distance);
+    distance = abs(distance);
 
     return sign * (((distance - 1) / 8) + 1);
 }
