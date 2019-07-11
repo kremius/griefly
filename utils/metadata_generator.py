@@ -85,6 +85,8 @@ def metadata_to_json(metadata: Dict[str, List]) -> str:
 def generate_metadata(directory: str) -> List[dict]:
     result = []
     for directory, directory_names, filenames in os.walk(directory):
+        directory_names.sort()
+        filenames.sort()
         for filename in [f for f in filenames if f.endswith(".h")]:
             full_path = os.path.join(directory, filename)
             if "KvMacros.h" not in full_path:
